@@ -15,7 +15,7 @@ class View(ft.UserControl):
         self._title = None
         self.txt_name = None
         self.btn_hello = None
-        self.txt_result = None
+        self._txtResults = None
         self.txt_container = None
 
     def load_interface(self):
@@ -34,27 +34,33 @@ class View(ft.UserControl):
         ], alignment=ft.MainAxisAlignment.CENTER)
 
         # row 2
-        self._ddAeroportoPartenza=ft.Dropdown(label="Aeroporto di Partenza")
+        self._ddAeroportoP=ft.Dropdown(label="Aeroporto di Partenza",    on_change=self._controller._choiceDDPartenza
+)
         self._btnAeroportiConnessi=ft.ElevatedButton(text="Aeroporti Connessi",
                                                      on_click=self._controller.handleConnessi)
 
 
         row2 = ft.Row([
             ft.Container(None, width=250),
-            ft.Container(self._ddAeroportoPartenza, width=250),
+            ft.Container(self._ddAeroportoP, width=250),
             ft.Container(self._btnAeroportiConnessi, width=250),
         ], alignment=ft.MainAxisAlignment.CENTER)
 
         # row 3
-        self._ddAeroportoA = ft.Dropdown(label="Aeroporto di Arrivo")
+        self._ddAeroportoA = ft.Dropdown(label="Aeroporto di Arrivo",        on_change=self._controller._choiceDDArrivo
+
+)
         self._txtInNTratteMax = ft.TextField(label="Numero Tratte Max")
         self._btnCercaItinerario=ft.ElevatedButton(text="Cerca Itinerario",
                                                    on_click=self._controller.handleCerca)
+        self._btnTestConnessione = ft.ElevatedButton(text="Test Connessione",
+                                                     on_click=self._controller.handleTestConnessione)
 
         row3 = ft.Row([
             ft.Container(self._ddAeroportoA, width=250),
             ft.Container(self._txtInNTratteMax, width=250),
             ft.Container(self._btnCercaItinerario, width=250),
+            ft.Container(self._btnTestConnessione, width=250)
         ], alignment=ft.MainAxisAlignment.CENTER)
 
         self._txtResults=ft.ListView(expand=1,
